@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { operadorService } from '../services/api';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const router = useRouter();
@@ -25,31 +26,97 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Login</Text>
-      <TextInput
-        placeholder="Email"
-        style={styles.input}
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-      />
-      <TextInput
-        placeholder="Senha"
-        style={styles.input}
-        value={senha}
-        onChangeText={setSenha}
-        secureTextEntry
-      />
-      <Button title="Entrar" onPress={handleLogin} />
+    <View style={styles.background}>
+      <View style={styles.card}>
+        {/* Ícone vermelho */}
+        <View style={styles.iconCircle}>
+          <Ionicons name="person" size={50} color="white" />
+        </View>
+
+        <Text style={styles.title}>Tela de entrada</Text>
+
+        {/* Campo Email */}
+        <Text style={styles.label}>Email de acesso:</Text>
+        <TextInput
+          placeholder="Digite seu email"
+          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+        />
+
+        {/* Campo Senha */}
+        <Text style={styles.label}>Senha:</Text>
+        <TextInput
+          placeholder="Digite sua senha"
+          style={styles.input}
+          value={senha}
+          onChangeText={setSenha}
+          secureTextEntry
+        />
+
+        {/* Botão Entrar */}
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Entrar</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', padding: 20 },
-  titulo: { fontSize: 24, marginBottom: 20, textAlign: 'center' },
+  background: {
+    flex: 1,
+    backgroundColor: '#1c1c1c', // cor do background
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  card: {
+    backgroundColor: '#bfbfbf',
+    borderRadius: 8,
+    padding: 20,
+    width: '85%',
+    alignItems: 'center',
+    elevation: 5,
+  },
+  iconCircle: {
+    backgroundColor: '#d9534f',
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 20,
+  },
+  label: {
+    alignSelf: 'flex-start',
+    fontSize: 14,
+    marginBottom: 5,
+    color: '#d9534f',
+  },
   input: {
-    borderWidth: 1, borderColor: '#ccc', padding: 10, marginBottom: 15, borderRadius: 5
-  }
+    backgroundColor: '#f5f5f5',
+    width: '100%',
+    padding: 10,
+    borderRadius: 4,
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: '#aaa',
+  },
+  button: {
+    backgroundColor: '#d9534f',
+    paddingVertical: 10,
+    paddingHorizontal: 25,
+    borderRadius: 5,
+    alignSelf: 'flex-end', // posição do botão de entrar
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: '600',
+  },
 });

@@ -44,7 +44,7 @@ export const equipamentoService ={
     getEA: () => api.get('/equipamentos/listar'),
     getEAbyId: (id) => api.get(`/equipamentos/listar/${id}`),
     deleteEA: (id) => api.get(`/equipamentos/listar/${id}`),
-    updateEA: (id) => api.put(`/equipamentos/listar/${id}/status`, data)
+    updateEA: (id) => api.put(`/equipamentos/listar/${id}/status`, data)     
 };
 
 export const produtoService ={
