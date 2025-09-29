@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, ActivityIndicator, ScrollView } from 'react-native';
-import { equipamentoService } from '../services/api'; // ajuste o caminho se necessário
+import { equipamentoService } from '../services/api';
 
 const getStatusInfo = (status) => {
   switch (status) {
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   listaContainer: {
     borderWidth: 2,
-    borderColor: 'yellow',
+    borderColor: 'orange',
     borderRadius: 10,
     padding: 12,
     backgroundColor: 'rgba(30,30,30, 1.0)',
