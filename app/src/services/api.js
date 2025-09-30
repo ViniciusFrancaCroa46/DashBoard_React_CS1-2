@@ -41,10 +41,10 @@ api.interceptors.response.use(
 // Cliente endpoints
 export const equipamentoService ={
     createEA: (data) => api.post('/equipamentos/registrar', data),
-    getEA: () => api.get('/equipamentos/listar'),
-    getEAbyId: (id) => api.get(`/equipamentos/listar/${id}`),
-    deleteEA: (id) => api.get(`/equipamentos/listar/${id}`),
-    updateEA: (id) => api.put(`/equipamentos/listar/${id}/status`, data)     
+    getEA: () => api.get('/equipamentos'),
+    getEAbyId: (id) => api.get(`/equipamentos/${id}`),
+    deleteEA: (id) => api.get(`/equipamentos/${id}`),
+    updateEA: (id) => api.put(`/equipamentos/${id}/status`, data)     
 };
 
 export const produtoService ={

@@ -3,25 +3,41 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'reac
 import { operadorService } from '../services/api';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import Toast from "../components/Toast";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [toast, setToast] = useState({ visible: false, message: "", type: "error" });
   const router = useRouter();
 
+  // Função para exibir mensagens
+  const showToast = (message, type = "error") => {
+    setToast({ visible: true, message, type });
+    setTimeout(() => setToast({ visible: false, message: "", type: "error" }), 3000);
+  };
+
   const handleLogin = async () => {
+
+    if(!email || !senha) {
+      showToast("Preencha todos os campos.", "error");
+      return;
+    }
+
     try {
       const { data } = await operadorService.loginOp({ email, senha });
 
       if (data === 'Login realizado com sucesso!') {
         router.push('./home');
       } else {
-        Alert.alert('Falha no login', 'Email ou senha incorretos');
+        showToast('Falha no login', 'Email ou senha incorretos');
+        return;
       }
 
     } catch (error) {
       console.error(error);
-      Alert.alert('Erro', 'Não foi possível conectar ao servidor');
+      showToast('Erro', 'Não foi possível conectar ao servidor');
+      return;
     }
   };
 
@@ -60,6 +76,8 @@ export default function LoginScreen() {
           <Text style={styles.buttonText}>Entrar</Text>
         </TouchableOpacity>
       </View>
+      
+      {toast.visible && <Toast message={toast.message} type={toast.type} />}
     </View>
   );
 }
