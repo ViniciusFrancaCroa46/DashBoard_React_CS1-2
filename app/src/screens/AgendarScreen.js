@@ -73,7 +73,8 @@ export default function AgendarScreen() {
           value={id}
           onChangeText={(text) => setId(text.toUpperCase())}
           placeholder="Ex: 123ABC"
-          autoCapitalize="characters" //forçar letras maiúsculas
+          autoCapitalize= "characters" //forçar letras maiúsculas
+          maxLength={6}
         />
 
         <Text style={styles.label}>Setor do produto</Text>
